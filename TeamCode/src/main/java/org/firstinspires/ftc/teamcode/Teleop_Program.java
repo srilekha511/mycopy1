@@ -5,7 +5,7 @@ import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.util.ElapsedTime;
 import com.qualcomm.robotcore.util.Range;
-
+import com.qualcomm.robotcore.hardware.Servo;
 
     @TeleOp(name="Teleop_Program", group="Linear Opmode")
 //@Disabled
@@ -15,6 +15,7 @@ import com.qualcomm.robotcore.util.Range;
         private ElapsedTime runtime = new ElapsedTime();
         private DcMotor Motor1 = null;
         private DcMotor Motor2 = null;
+        private Servo servoTest;
 
         @Override
         public void runOpMode() {
@@ -62,9 +63,22 @@ import com.qualcomm.robotcore.util.Range;
                 Motor1.setPower(leftPower);
                 Motor2.setPower(rightPower);
 
-                // Show the elapsed game time and wheel power.
+                //Servo controls
+                if(gamepad1.y) {
+                    // Pressing Y makes the servo move to 0 degrees.
+                    servoTest.setPosition(0);
+                } else if (gamepad1.x || gamepad1.b) {
+                    // Pressing X or B makes the servo move to 90 degrees.
+                    servoTest.setPosition(0.5);
+                } else if (gamepad1.a) {
+                    // Pressing A makes the servo move to 180 degrees.
+                    servoTest.setPosition(1);
+                }
+
+                // Shows the elapsed game time and wheel power.
                 telemetry.addData("Status", "Run Time: " + runtime.toString());
                 telemetry.addData("Motors", "left (%.2f), right (%.2f)", leftPower, rightPower);
+                telemetry.addData("Servo Position", servoTest.getPosition());
                 telemetry.update();
             }
         }
