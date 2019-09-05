@@ -15,7 +15,7 @@ import com.qualcomm.robotcore.hardware.Servo;
         private ElapsedTime runtime = new ElapsedTime();
         private DcMotor Motor1 = null;
         private DcMotor Motor2 = null;
-        private Servo servoTest;
+        private Servo servoTest = null;
 
         @Override
         public void runOpMode() {
@@ -78,7 +78,7 @@ import com.qualcomm.robotcore.hardware.Servo;
                 // Shows the elapsed game time and wheel power.
                 telemetry.addData("Status", "Run Time: " + runtime.toString());
                 telemetry.addData("Motors", "left (%.2f), right (%.2f)", leftPower, rightPower);
-                telemetry.addData("Servo Position", servoTest.getPosition());
+                //telemetry.addData("Servo Position", servoTest.getPosition());
                 telemetry.update();
             }
         }
